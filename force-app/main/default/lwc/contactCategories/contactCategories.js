@@ -7,7 +7,7 @@ export default class ContactCategories extends LightningElement {
     @api recordId
     @api selectedView;
     @api contactList = [];
-    @api sortAscContact = false; 
+    @api sortAscContact = false;
 
     connectedCallback(){
         console.log('Has record Id?: ' + this.recordId);
