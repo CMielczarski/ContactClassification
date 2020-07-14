@@ -1,0 +1,50 @@
+<template>
+    <div style="background-color: azure;">
+        <table>
+            <thead>
+                <th>
+                    <lightning-button label="Name" name="Name" onclick={sortContact}></lightning-button>
+                </th>
+                <th>
+                    <lightning-button label="Contact Status" name="KRS_Contact_Status__c" onclick={sortContact}></lightning-button>
+                </th>
+                <th>
+                    <lightning-button label="Title" name="Title" onclick={sortContact}></lightning-button>
+                </th>
+                <th>
+                    <lightning-button label="Phone" name="Phone" onclick={sortContact}></lightning-button>
+                </th>
+                <th>
+                    <lightning-button label="Phone Extension" name="KRS_Extension__c" onclick={sortContact}></lightning-button>
+                </th>
+                <th>
+                    <lightning-button label="Email" name="Email" onclick={sortContact}></lightning-button>
+                </th>
+            </thead>
+            <tbody>
+                <template for:each={contactList} for:item="contact">
+                    <tr key={contact.Id}>
+                        <td>
+                            <lightning-formatted-url value={contact.Id} label={contact.Name} target="_blank" onclick={openItem}></lightning-formatted-url>
+                        </td>
+                        <td>
+                            <lightning-formatted-text value={contact.KRS_Contact_Status__c}></lightning-formatted-text>
+                        </td>
+                        <td>
+                            <lightning-formatted-text value={contact.Title}></lightning-formatted-text>
+                        </td>
+                        <td>
+                            <lightning-formatted-text value={contact.Phone}></lightning-formatted-text>
+                        </td>
+                        <td>
+                            <lightning-formatted-text value={contact.KRS_Extension__c}></lightning-formatted-text>
+                        </td>
+                        <td>
+                            <lightning-formatted-text value={contact.Email}></lightning-formatted-text>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template>
