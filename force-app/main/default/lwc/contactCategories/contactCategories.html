@@ -1,5 +1,15 @@
 <template>
     <div style="background-color: azure;">
+        <div>
+            <lightning-button label="Back" onclick={back}></lightning-button>
+            <br/>
+            <br/>
+        </div>
+        <template if:true={showMessage}>
+            <div>
+                <lightning-formatted-text value="No Contacts found for this Account which match the selected category." style="font-weight:bold; color:red"></lightning-formatted-text>
+            </div>
+        </template>
         <table>
             <thead>
                 <th>
@@ -15,7 +25,7 @@
                     <lightning-button label="Phone" name="Phone" onclick={sortContact}></lightning-button>
                 </th>
                 <th>
-                    <lightning-button label="Phone Extension" name="KRS_Extension__c" onclick={sortContact}></lightning-button>
+                    <lightning-button label="Nickname" name="PF_Nickname__c" onclick={sortContact}></lightning-button>
                 </th>
                 <th>
                     <lightning-button label="Email" name="Email" onclick={sortContact}></lightning-button>
@@ -37,7 +47,7 @@
                             <lightning-formatted-text value={contact.Phone}></lightning-formatted-text>
                         </td>
                         <td>
-                            <lightning-formatted-text value={contact.KRS_Extension__c}></lightning-formatted-text>
+                            <lightning-formatted-text value={contact.PF_Nickname__c}></lightning-formatted-text>
                         </td>
                         <td>
                             <lightning-formatted-text value={contact.Email}></lightning-formatted-text>

@@ -1,0 +1,6 @@
+.slds-modal__container {
+    height : 100vh !important; 
+    max-height: 100vh !important;
+    width : 125vh !important; 
+    max-width: 125vh !important;
+}

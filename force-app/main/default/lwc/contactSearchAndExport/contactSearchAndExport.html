@@ -1,0 +1,140 @@
+<template>
+    <lightning-button label="Search Contacts for Campaigns"
+                          icon-name="utility:new_window"
+                          icon-position="left"
+                          variant="brand"
+                          onclick={newPopup}
+                          >
+    </lightning-button>
+    <template if:true={showForm}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                <p class="slds-m-top_x-small">Contact Search</p>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <template if:true={Spinner}>
+                    <div id="spinnerId" class="slds-spinner_container">
+                        <div class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative" role="alert">
+                            <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </template>
+                    <div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <lightning-formatted-text value="Contact Title Category"></lightning-formatted-text>
+                                        <br/>
+                                        <select class="slds-select, rad" name="InputSelectTitle" onchange={setTitle}>
+                                            <template for:each={selTitles} for:item="title"> 
+                                                <option value={title} key={title}>{title}</option> 
+                                            </template>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <lightning-dual-listbox name="states"
+                                            label= "Filter by State"
+                                            source-label="Available"
+                                            selected-label="Selected"
+                                            options={selStates}
+                                            onchange={setState}>
+									    </lightning-dual-listbox>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <lightning-button label="Search" onclick={searchRecords}></lightning-button>
+                                        </td>
+                                        <td>
+                                            <lightning-button label="Export" onclick={downloadCsvAllRecords} disabled={showMessage}></lightning-button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </div>
+                            <br/>
+                            <div>
+                                <template if:true={showMessage}>
+                                    <div>
+                                        <lightning-formatted-text value="No Contacts found which match the selected categories." style="font-weight:bold; color:red"></lightning-formatted-text>
+                                    </div>
+                                </template>
+                                <table>
+                                    <thead>
+                                        <th>
+                                            <lightning-button label="Name" name="Name" onclick={sortContact}></lightning-button>
+                                        </th>
+                                        <th>
+                                            <lightning-button label="Contact Status" name="KRS_Contact_Status__c" onclick={sortContact}></lightning-button>
+                                        </th>
+                                        <th>
+                                            <lightning-button label="Title" name="Title" onclick={sortContact}></lightning-button>
+                                        </th>
+                                        <th>
+                                            <lightning-button label="Phone" name="Phone" onclick={sortContact}></lightning-button>
+                                        </th>
+                                        <th>
+                                            <lightning-button label="Nickname" name="PF_Nickname__c" onclick={sortContact}></lightning-button>
+                                        </th>
+                                        <th>
+                                            <lightning-button label="Email" name="Email" onclick={sortContact}></lightning-button>
+                                        </th>
+                                        <th>
+                                            <lightning-button label="Account" name="Account.Name" onclick={sortContact}></lightning-button>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={contactList} for:item="contact">
+                                            <tr key={contact.Id}>
+                                                <td>
+                                                    <lightning-formatted-url value={contact.Id} label={contact.Name} target="_blank" onclick={openItem}></lightning-formatted-url>
+                                                </td>
+                                                <td>
+                                                    <lightning-formatted-text value={contact.KRS_Contact_Status__c}></lightning-formatted-text>
+                                                </td>
+                                                <td>
+                                                    <lightning-formatted-text value={contact.Title}></lightning-formatted-text>
+                                                </td>
+                                                <td>
+                                                    <lightning-formatted-text value={contact.Phone}></lightning-formatted-text>
+                                                </td>
+                                                <td>
+                                                    <lightning-formatted-text value={contact.KRS_Extension__c}></lightning-formatted-text>
+                                                </td>
+                                                <td>
+                                                    <lightning-formatted-text value={contact.Email}></lightning-formatted-text>
+                                                </td>
+                                                <th>
+                                                    <lightning-formatted-text value={contact.Account.Name}></lightning-formatted-text>
+                                                </th>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+              <footer class="slds-modal__footer">
+                <table>
+                    <tr style="text-align:right">
+                        <td colspan="2">
+                            <br/><br/>
+                            <lightning-button label="Close" onclick={closeNewModal}
+                                                            variant="brand"></lightning-button>
+                        </td>
+                    </tr>
+                </table>
+              </footer>
+            </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

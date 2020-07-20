@@ -915,8 +915,24 @@ global without sharing class AA_UtilityClass{
             return clinical;
             }
         set;
-        }
-    
+		}
+	/*		
+	public static list<string> getRegionChoices{
+		get{
+			list<string> clinical = new list<string>{'AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'};
+			return clinical;
+			}
+		set;
+		}
+	
+	public static list<string> getTitleChoices{
+		get{
+			list<string> clinical = new list<string>{'All', 'C-Suite', 'Fac-Admin', 'Clinical'};
+			return clinical;
+			}
+		set;
+		}
+    */
     public static ID getKRSSRSSupportID{
 		get{
 			ID srsSupport;

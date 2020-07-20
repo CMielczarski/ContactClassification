@@ -1,13 +1,16 @@
 import { LightningElement, api } from 'lwc';
 
+import { NavigationMixin } from 'lightning/navigation';
+
 import getRecords from '@salesforce/apex/AA_ContactViewGrouping.getRecords';
 
-export default class ContactCategories extends LightningElement {
+export default class ContactCategories extends NavigationMixin(LightningElement) {
 
     @api recordId
     @api selectedView;
     @api contactList = [];
     @api sortAscContact = false;
+    showMessage = false;
 
     connectedCallback(){
         console.log('Has record Id?: ' + this.recordId);
@@ -19,6 +22,12 @@ export default class ContactCategories extends LightningElement {
             .then(
                 result=>{
                         this.contactList = result;
+                        if(this.contactList.length === 0){
+                            this.showMessage = true;
+                            }
+                        else{
+                            this.showMessage = false;
+                            }
                         }
                 )
             .catch(
@@ -62,6 +71,10 @@ export default class ContactCategories extends LightningElement {
         var id = event.target.value;
         var url = '/' + id;
         window.open(url);
+        }
+
+    back(){
+        window.location.href = '/lightning/r/Account/' + this.recordId + '/view';
         }
 
 }
